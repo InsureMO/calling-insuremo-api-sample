@@ -9,6 +9,53 @@
 			"name": "Proposal",
 			"item": [
 				{
+					"name": "00.Query",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;",
+									"var responseJSONData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"ProposalNo\", responseJSONData.ProposalNo);",
+									"postman.setEnvironmentVariable(\"policyInfo\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Conditions\": {\r\n        \"ProductCode\": \"TBTI\"      \r\n    },\r\n    \"PageNo\": 1,\r\n    \"PageSize\": 100,\r\n    \"SortField\": \"index_time\",\r\n    \"SortType\": \"desc\",\r\n    \"Module\": \"Policy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/query",
+							"host": [
+								"{{APIGatewayURL}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "01.Create",
 					"event": [
 						{
@@ -41,9 +88,9 @@
 							"raw": "{\r\n    \"BeforeVatPremium\": 121.5,\r\n    \"BusinessCateCode\": \"1\",\r\n    \"Commission\": 6.075,\r\n    \"DuePremium\": 130,\r\n    \"EffectiveDate\": \"2019-04-22\",\r\n    \"ExpiryDate\": \"2019-04-24T23:59:59\",\r\n    \"IsPremiumCalcSuccess\": \"Y\",\r\n    \"PolicyCustomerList\": [\r\n        {\r\n            \"CustomerName\": \"Customer\",\r\n            \"DateOfBirth\": \"1988-10-01\",\r\n            \"IdNo\": \"IdNo\",\r\n            \"IdType\": \"1\",\r\n            \"IsInsured\": \"N\",\r\n            \"IsOrgParty\": \"N\",\r\n            \"IsPolicyHolder\": \"Y\",\r\n            \"VersionSeq\": 1\r\n        }\r\n    ],\r\n    \"PolicyLobList\": [\r\n        {\r\n            \"PolicyRiskList\": [\r\n                {\r\n                    \"CustomerName\": \"Customer\",\r\n                    \"DateOfBirth\": \"1988-10-01\",\r\n                    \"IdNo\": \"IdNo\",\r\n                    \"GenderCode\": \"F\",\r\n                    \"IdType\": \"1\",\r\n                    \"PolicyCoverageList\": [\r\n                        {\r\n                            \"DuePremium\": 100,\r\n                            \"ProductElementCode\": \"C100416\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        },\r\n                        {\r\n                            \"DuePremium\": 10,\r\n                            \"ProductElementCode\": \"C100692\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        },\r\n                        {\r\n                            \"DuePremium\": 20,\r\n                            \"ProductElementCode\": \"C100715\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        }\r\n                    ],\r\n                    \"ProductElementCode\": \"R10007\",\r\n                    \"RiskName\": \"InsuredName\",\r\n                    \"VersionSeq\": 1\r\n                }\r\n            ],\r\n            \"ProductCode\": \"TBTI\",\r\n            \"ProductElementCode\": \"TBTI\",\r\n            \"ProductId\": 351925022,\r\n            \"ProductLobId\": 351925023,\r\n            \"TechProductCode\": \"TR_POC\",\r\n            \"TechProductId\": 3516410623456,\r\n            \"TotalInsuredCount\": 1,\r\n            \"VersionSeq\": 1\r\n        }\r\n    ],\r\n    \"PolicyType\": \"1\",\r\n    \"ProductCode\": \"TBTI\",\r\n    \"ProductId\": 351925022,\r\n    \"ProductVersion\": \"1.0\",\r\n    \"ProposalDate\": \"2019-04-22\",\r\n    \"TechProductCode\": \"TR_POC\",\r\n    \"TechProductId\": 3516410623456,\r\n    \"Vat\": 8.5,\r\n    \"VersionSeq\": 1\r\n}"
 						},
 						"url": {
-							"raw": "{{server}}/platform/proposal/v1/create",
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/create",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"platform",
@@ -88,9 +135,9 @@
 							"raw": "{{policyInfo}}"
 						},
 						"url": {
-							"raw": "{{server}}/platform/proposal/v1/calculate",
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/calculate",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"platform",
@@ -133,9 +180,9 @@
 							"raw": "{{policyInfo}}"
 						},
 						"url": {
-							"raw": "{{server}}/platform/proposal/v1/save",
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/save",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"platform",
@@ -178,9 +225,9 @@
 							"raw": "{\n\t\"ProposalNo\": \"{{ProposalNo}}\"\n}"
 						},
 						"url": {
-							"raw": "{{server}}/platform/proposal/v1/issuePolicy",
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/issuePolicy",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"platform",
@@ -218,9 +265,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{server}}/platform/proposal/v1/load?proposalNo={{ProposalNo}}",
+							"raw": "{{APIGatewayURL}}/platform/proposal/v1/load?proposalNo={{ProposalNo}}",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"platform",
