@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "c768b01e-dd4a-40ba-b3f1-dbeea4540d3a",
+		"name": "InsureMO API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Proposal",
+			"item": [
+				{
+					"name": "01.Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;",
+									"var responseJSONData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"ProposalNo\", responseJSONData.ProposalNo);",
+									"postman.setEnvironmentVariable(\"policyInfo\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"BeforeVatPremium\": 121.5,\r\n    \"BusinessCateCode\": \"1\",\r\n    \"Commission\": 6.075,\r\n    \"DuePremium\": 130,\r\n    \"EffectiveDate\": \"2019-04-22\",\r\n    \"ExpiryDate\": \"2019-04-24T23:59:59\",\r\n    \"IsPremiumCalcSuccess\": \"Y\",\r\n    \"PolicyCustomerList\": [\r\n        {\r\n            \"CustomerName\": \"Customer\",\r\n            \"DateOfBirth\": \"1988-10-01\",\r\n            \"IdNo\": \"IdNo\",\r\n            \"IdType\": \"1\",\r\n            \"IsInsured\": \"N\",\r\n            \"IsOrgParty\": \"N\",\r\n            \"IsPolicyHolder\": \"Y\",\r\n            \"VersionSeq\": 1\r\n        }\r\n    ],\r\n    \"PolicyLobList\": [\r\n        {\r\n            \"PolicyRiskList\": [\r\n                {\r\n                    \"CustomerName\": \"Customer\",\r\n                    \"DateOfBirth\": \"1988-10-01\",\r\n                    \"IdNo\": \"IdNo\",\r\n                    \"GenderCode\": \"F\",\r\n                    \"IdType\": \"1\",\r\n                    \"PolicyCoverageList\": [\r\n                        {\r\n                            \"DuePremium\": 100,\r\n                            \"ProductElementCode\": \"C100416\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        },\r\n                        {\r\n                            \"DuePremium\": 10,\r\n                            \"ProductElementCode\": \"C100692\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        },\r\n                        {\r\n                            \"DuePremium\": 20,\r\n                            \"ProductElementCode\": \"C100715\",\r\n                            \"SumInsured\": 300000,\r\n                            \"VersionSeq\": 1\r\n                        }\r\n                    ],\r\n                    \"ProductElementCode\": \"R10007\",\r\n                    \"RiskName\": \"InsuredName\",\r\n                    \"VersionSeq\": 1\r\n                }\r\n            ],\r\n            \"ProductCode\": \"TBTI\",\r\n            \"ProductElementCode\": \"TBTI\",\r\n            \"ProductId\": 351925022,\r\n            \"ProductLobId\": 351925023,\r\n            \"TechProductCode\": \"TR_POC\",\r\n            \"TechProductId\": 3516410623456,\r\n            \"TotalInsuredCount\": 1,\r\n            \"VersionSeq\": 1\r\n        }\r\n    ],\r\n    \"PolicyType\": \"1\",\r\n    \"ProductCode\": \"TBTI\",\r\n    \"ProductId\": 351925022,\r\n    \"ProductVersion\": \"1.0\",\r\n    \"ProposalDate\": \"2019-04-22\",\r\n    \"TechProductCode\": \"TR_POC\",\r\n    \"TechProductId\": 3516410623456,\r\n    \"Vat\": 8.5,\r\n    \"VersionSeq\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/platform/proposal/v1/create",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02.Calculate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;",
+									"var responseJSONData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"ProposalNo\", responseJSONData.ProposalNo);",
+									"postman.setEnvironmentVariable(\"policyInfo\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{policyInfo}}"
+						},
+						"url": {
+							"raw": "{{server}}/platform/proposal/v1/calculate",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"calculate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03.Save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;",
+									"postman.setEnvironmentVariable(\"policyInfo\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{policyInfo}}"
+						},
+						"url": {
+							"raw": "{{server}}/platform/proposal/v1/save",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04.Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ProposalNo\": \"{{ProposalNo}}\"\n}"
+						},
+						"url": {
+							"raw": "{{server}}/platform/proposal/v1/issuePolicy",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"issuePolicy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05.Load",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"response code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/platform/proposal/v1/load?proposalNo={{ProposalNo}}",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"platform",
+								"proposal",
+								"v1",
+								"load"
+							],
+							"query": [
+								{
+									"key": "proposalNo",
+									"value": "{{ProposalNo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mail",
+			"item": [
+				{
+					"name": "01.Send",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json;charset=UTF-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account\": \"insuremo-sandbox2@insuremo.com\",\r\n    \"alias\": \"InsureMO\",\r\n    \"autoformat\": false,\r\n    \"consignee\": [\r\n        \"{{EmailAccount}}\"\r\n    ],\r\n    \"content\": \"Hello ,this is a test mail.\",\r\n    \"priority\": false,\r\n    \"subject\": \"Email Service Testing Email\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/eBao/1.0/email/send",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"eBao",
+								"1.0",
+								"email",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
