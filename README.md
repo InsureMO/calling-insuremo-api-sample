@@ -14,6 +14,8 @@ Refer to the following figures to select two files in ./postman directory and cl
 ![Select Files](./docs/images/import_1.png)
 
 ![Do Import](./docs/images/import_2.png)
+The final result like below figure.   
+![List](./docs/images/list.png)
 
 ### Step 2: Setup access_token with InsureMO Token and email account.
 ![setup variable](./docs/images/setup_var.png)
