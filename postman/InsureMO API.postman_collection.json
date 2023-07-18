@@ -15,10 +15,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"tests[\"response code is 200\"] = responseCode.code === 200;",
-									"var responseJSONData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"ProposalNo\", responseJSONData.ProposalNo);",
-									"postman.setEnvironmentVariable(\"policyInfo\", responseBody);"
+									"tests[\"response code is 200\"] = responseCode.code === 200;"
 								],
 								"type": "text/javascript"
 							}
@@ -38,7 +35,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Conditions\": {\r\n        \"ProductCode\": \"TBTI\"      \r\n    },\r\n    \"PageNo\": 1,\r\n    \"PageSize\": 100,\r\n    \"SortField\": \"index_time\",\r\n    \"SortType\": \"desc\",\r\n    \"Module\": \"Policy\"\r\n}"
+							"raw": "{\r\n    \"Conditions\": {\r\n        \"ProductCode\": \"TBTI\"      \r\n    },\r\n    \"PageNo\": 1,\r\n    \"PageSize\": 2,\r\n    \"SortField\": \"index_time\",\r\n    \"SortType\": \"desc\",\r\n    \"Module\": \"Policy\"\r\n}"
 						},
 						"url": {
 							"raw": "{{APIGatewayURL}}/platform/proposal/v1/query",
