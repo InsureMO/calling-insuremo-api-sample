@@ -23,6 +23,11 @@ The final result like below figure.
 ### Step 3: You can access the API now. Take ***00.Query*** as an example,refer below figure.
 ![sample query](./docs/images/query.png)
 
+### Step 4:Reset Organization.
+If you have done all above steps and want to see the policy you created with  User Interface.   
+You need to align login user branch code to ebaogi with below steps.    
+Menu:  URP->User Manager,Search your login user name ,click Edit button,and set the Organization Name to ebaogi.
+
 
 
 
