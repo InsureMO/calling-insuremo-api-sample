@@ -318,9 +318,9 @@
 							"raw": "{\r\n    \"account\": \"insuremo-sandbox2@insuremo.com\",\r\n    \"alias\": \"InsureMO\",\r\n    \"autoformat\": false,\r\n    \"consignee\": [\r\n        \"{{EmailAccount}}\"\r\n    ],\r\n    \"content\": \"Hello ,this is a test mail.\",\r\n    \"priority\": false,\r\n    \"subject\": \"Email Service Testing Email\"\r\n}"
 						},
 						"url": {
-							"raw": "{{server}}/eBao/1.0/email/send",
+							"raw": "{{APIGatewayURL}}/eBao/1.0/email/send",
 							"host": [
-								"{{server}}"
+								"{{APIGatewayURL}}"
 							],
 							"path": [
 								"eBao",
